@@ -1,0 +1,12 @@
+                        Cloudflare CDN
+                               |
+                        Cloudflare Firewall
+                               |
+                      Azure Traffic Manager
+                               |
+                        Azure Load Balancer
+             |----------------|----------------|
+      Azure Virtual Machine 1    |        Azure Virtual Machine 2
+               |----------------|----------------|
+               |                |                 |
+          Azure Database for MySQL             Azure Kubernetes Service

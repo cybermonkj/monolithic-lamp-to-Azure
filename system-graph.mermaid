@@ -1,0 +1,46 @@
+graph LR
+
+subgraph Monolithic App
+  A[Apache Server]
+  P[PHP Application]
+  M[MySQL Database]
+end
+
+subgraph Cloudflare
+  CDN[Cloudflare CDN]
+  FW[Cloudflare Firewall]
+end
+
+subgraph Azure Cloud
+  AKS[Azure Kubernetes Service]
+  DB[Azure Database for MySQL]
+  LB[Azure Load Balancer]
+  VM1[Azure Virtual Machine 1]
+  VM2[Azure Virtual Machine 2]
+  VM3[Azure Virtual Machine 3]
+  TM[Azure Traffic Manager]
+  AM[Azure Monitor]
+  CM[Azure Cost Management]
+end
+
+CDN -- Speeds Up --> A
+FW -- Protects --> A
+
+A -- Incoming HTTP Requests --> P
+P -- Queries --> M
+M -- Database Operations --> P
+P -- Renders HTML --> A
+
+AKS -- Runs --> P
+AKS -- Runs --> M
+DB -- Stores --> M
+LB -- Balances Load --> VM1
+LB -- Balances Load --> VM2
+LB -- Balances Load --> VM3
+VM1 -- Runs --> P
+VM2 -- Runs --> P
+VM3 -- Runs --> P
+TM -- Routes Traffic --> LB
+AM -- Monitors --> AKS
+AM -- Monitors --> DB
+CM -- Monitors Costs --> Azure Cloud
